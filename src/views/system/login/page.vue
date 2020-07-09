@@ -33,10 +33,10 @@
                 :rules="rules"
                 :model="formLogin"
                 size="default">
-                <el-form-item prop="username">
+                <el-form-item prop="account">
                   <el-input
                     type="text"
-                    v-model="formLogin.username"
+                    v-model="formLogin.account"
                     placeholder="账号">
                     <i slot="prepend" class="fa fa-user-circle-o"></i>
                   </el-input>
@@ -103,13 +103,13 @@ export default {
       ],
       // 表单
       formLogin: {
-        username: '',
+        account: '',
         password: '',
         code: ''
       },
       // 表单校验
       rules: {
-        username: [
+        account: [
           {
             required: true,
             message: '请输入用户名',
@@ -149,15 +149,6 @@ export default {
       this.time = dayjs().format('HH:mm:ss')
     },
     /**
-     * @description 接收选择一个用户快速登录的事件
-     * @param {Object} user 用户信息
-     */
-    handleUserBtnClick (user) {
-      this.formLogin.username = user.username
-      this.formLogin.password = user.password
-      this.submit()
-    },
-    /**
      * @description 提交表单
      */
     // 提交登录信息
@@ -168,8 +159,9 @@ export default {
           // 注意 这里的演示没有传验证码
           // 具体需要传递的数据请自行修改代码
           this.login({
-            username: this.formLogin.username,
-            password: this.formLogin.password
+            account: this.formLogin.account,
+            password: this.formLogin.password,
+            code: this.formLogin.code
           })
             .then(() => {
               // 重定向对象不存在则返回顶层路径

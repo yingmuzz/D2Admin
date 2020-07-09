@@ -9,15 +9,17 @@ export default {
     /**
      * @description 登录
      * @param {Object} context
-     * @param {Object} payload username {String} 用户账号
+     * @param {Object} payload account {String} 用户账号
      * @param {Object} payload password {String} 密码
+     * @param {Object} payload code {String} 验证码
      * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
      */
     async login ({ dispatch }, {
-      username = '',
-      password = ''
+      account = '',
+      password = '',
+      code = ''
     } = {}) {
-      const res = await api.SYS_USER_LOGIN({ username, password })
+      const res = await api.SYS_ADMIN_LOGIN({ account, password, code })
       // 设置 cookie 一定要存 uuid 和 token 两个 cookie
       // 整个系统依赖这两个数据进行校验和存储
       // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
@@ -26,7 +28,7 @@ export default {
       util.cookies.set('uuid', res.uuid)
       util.cookies.set('token', res.token)
       // 设置 vuex 用户信息
-      await dispatch('d2admin/user/set', { name: res.name }, { root: true })
+      await dispatch('d2admin/user/set', { name: account }, { root: true })
       // 用户登录后从持久化数据加载一系列的设置
       await dispatch('load')
     },
