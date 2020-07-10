@@ -42,6 +42,9 @@ export default {
        * @description 注销
        */
       async function logout () {
+        var token = util.cookies.get('token')
+        await api.SYS_ADMIN_LOGOUT({ token })
+
         // 删除cookie
         util.cookies.remove('token')
         util.cookies.remove('uuid')

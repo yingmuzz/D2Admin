@@ -9,5 +9,16 @@ export default ({ service, request, serviceForMock, requestForMock, mock, faker,
       method: 'post',
       data
     })
+  },
+  /**
+   * @description 退出登录
+   * @param {Object} data 退出登录携带的信息
+   */
+  SYS_ADMIN_LOGOUT (data = {}) {
+    return request({
+      url: '/logout',
+      method: 'post',
+      data
+    })
   }
 })

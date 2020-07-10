@@ -36,7 +36,6 @@ function createService () {
           case 1:
             // [ 示例 ] code === 1 代表没有错误
             return dataAxios.data
-            break
           default:
             // 不是正确的 code
             errorCreate(`[ code: ${dataAxios.code} ] ${dataAxios.msg}`)
