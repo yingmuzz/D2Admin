@@ -84,3 +84,13 @@ export function errorCreate (msg) {
   errorLog(error)
   throw error
 }
+
+/**
+ * Api接口请求失败退出登录
+ * @return bool
+ */
+export function apiRequestLogout () {
+  store.dispatch('d2admin/account/logout')
+
+  return true
+}

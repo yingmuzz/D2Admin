@@ -2,7 +2,7 @@ import axios from 'axios'
 import Adapter from 'axios-mock-adapter'
 import { get } from 'lodash'
 import util from '@/libs/util'
-import { errorLog, errorCreate } from './tools'
+import { errorLog, errorCreate, apiRequestLogout } from './tools'
 
 /**
  * @description 创建请求实例
@@ -36,6 +36,9 @@ function createService () {
           case 1:
             // [ 示例 ] code === 1 代表没有错误
             return dataAxios.data
+          case -1:
+            apiRequestLogout()
+            break
           default:
             // 不是正确的 code
             errorCreate(`[ code: ${dataAxios.code} ] ${dataAxios.msg}`)
